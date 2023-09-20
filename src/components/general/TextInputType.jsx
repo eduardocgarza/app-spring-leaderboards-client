@@ -3,13 +3,15 @@ import React from "react";
 export default function TextInputType(props) {
   const { title, name, placeholder, value, handleTextInput, required } = props;
   return (
-    <div className="mb-4 w-full mr-2">
-      <label
-        htmlFor={title.toLowerCase()}
-        className="block mb-2 text-sm font-medium text-gray-900"
-      >
-        {title}
-      </label>
+    <div className="w-full mr-2">
+      {title && (
+        <label
+          htmlFor={title.toLowerCase()}
+          className="block mb-2 text-sm font-medium text-gray-900"
+        >
+          {title}
+        </label>
+      )}
       <input
         type="text"
         id={name}

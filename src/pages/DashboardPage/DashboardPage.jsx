@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAppContext from "../../state/AppContext";
 import DashboardHeader from "./components/DashboardHeader";
 import DashboardLeaderboards from "./components/DashboardLeaderboards";
@@ -13,8 +13,10 @@ export default function DashboardPage() {
   /**
    * @State
    */
-  const [formattedUsers, setFormattedUsers] = React.useState([]);
-  const [sortMode, setSortMode] = React.useState({
+  const [search, setSearch] = useState("");
+  const [formattedUsers, setFormattedUsers] = useState([]);
+  const [displayedUsers, setDisplayedUsers] = useState([]);
+  const [sortMode, setSortMode] = useState({
     type: "points",
     direction: "desc",
   });
@@ -48,13 +50,34 @@ export default function DashboardPage() {
     }
 
     setFormattedUsers(formattedUsers);
+    setDisplayedUsers(formattedUsers);
   }, [sortMode, userObjects]);
+
+  useEffect(() => {
+    const filteredUsers = formattedUsers.filter((user) => {
+      const searchKeywords = search.toLowerCase().split(" ");
+      return searchKeywords.every((keyword) =>
+        user.firstName.toLowerCase().includes(keyword)
+      );
+    });
+    setDisplayedUsers(filteredUsers);
+  }, [search, formattedUsers]);
+
+  function handleSearch(e) {
+    const value = e.target.value;
+    setSearch(value);
+  }
 
   return (
     <section className="py-10 px-4">
       <div className="container mx-auto">
-        <DashboardHeader sortMode={sortMode} setSortMode={setSortMode} />
-        <DashboardLeaderboards users={formattedUsers} />
+        <DashboardHeader
+          search={search}
+          sortMode={sortMode}
+          handleSearch={handleSearch}
+          setSortMode={setSortMode}
+        />
+        <DashboardLeaderboards users={displayedUsers} />
       </div>
     </section>
   );
