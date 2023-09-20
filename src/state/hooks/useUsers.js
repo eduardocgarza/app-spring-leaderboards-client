@@ -31,7 +31,55 @@ export default function useUsers() {
     }
   }
 
+  function createUser(userObject) {
+    setUserObjects((prevUserObject) => [...prevUserObject, userObject]);
+  }
+
+  function updateUser(userID, userObject) {
+    setUserObjects((prevUserObject) =>
+      prevUserObject.map((prevUserObject) =>
+        prevUserObject.userID === userID ? userObject : prevUserObject
+      )
+    );
+  }
+
+  function deleteUser(userID) {
+    setUserObjects((prevUserObject) =>
+      prevUserObject.filter(
+        (prevUserObject) => prevUserObject.userID !== userID
+      )
+    );
+  }
+
+  function incrementUserPoints(userID) {
+    setUserObjects((prevUserObject) =>
+      prevUserObject.map((prevUserObject) =>
+        prevUserObject.userID === userID
+          ? { ...prevUserObject, points: prevUserObject.points + 1 }
+          : prevUserObject
+      )
+    );
+  }
+
+  function decrementUserPoints(userID) {
+    setUserObjects((prevUserObject) =>
+      prevUserObject.map((prevUserObject) =>
+        prevUserObject.userID === userID
+          ? {
+              ...prevUserObject,
+              points: Math.max(0, prevUserObject.points - 1),
+            }
+          : prevUserObject
+      )
+    );
+  }
+
   return {
     userObjects,
+    createUser,
+    updateUser,
+    deleteUser,
+    incrementUserPoints,
+    decrementUserPoints,
   };
 }
