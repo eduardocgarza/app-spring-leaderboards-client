@@ -1,1 +1,0 @@
-# app-spring-leaderboards-client

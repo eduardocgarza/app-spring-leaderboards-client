@@ -15,8 +15,8 @@ export default function DashboardPage() {
    */
   const [formattedUsers, setFormattedUsers] = React.useState([]);
   const [sortMode, setSortMode] = React.useState({
-    type: "name",
-    direction: "asc",
+    type: "points",
+    direction: "desc",
   });
 
   useEffect(() => {
