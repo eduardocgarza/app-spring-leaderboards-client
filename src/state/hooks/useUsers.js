@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Logger from "../../constants/Logger";
 import { publicRouter } from "../../network/ServerRouter";
-import { getAllUsersEndpoint } from "../../network/routes/usersRoutes";
+import { getAllUsersEndpoint } from "../../network/routes/userRoutes";
 
 export default function useUsers() {
   /**

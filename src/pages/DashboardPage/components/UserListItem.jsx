@@ -14,7 +14,7 @@ import {
   decrementUserPointsEndpoint,
   deleteUserEndpoint,
   incrementUserPointsEndpoint,
-} from "../../../network/routes/usersRoutes";
+} from "../../../network/routes/userRoutes";
 
 export default function UserListItem(props) {
   /**

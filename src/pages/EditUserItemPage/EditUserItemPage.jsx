@@ -8,7 +8,7 @@ import FormError from "../../components/general/FormError";
 import EditUserHeader from "./components/EditUserHeader";
 import editUserValidateForm from "./helpers/editUserValidateForm";
 import editUserItemInitialState from "./helpers/editUserItemInitialState";
-import { editUserEndpoint } from "../../network/routes/usersRoutes";
+import { editUserEndpoint } from "../../network/routes/userRoutes";
 import editUserFormChanged from "./helpers/editUserFormChanged";
 
 export default function EditUserItemPage() {

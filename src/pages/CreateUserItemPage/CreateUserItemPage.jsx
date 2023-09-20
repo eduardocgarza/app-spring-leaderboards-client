@@ -6,7 +6,7 @@ import { publicRouter } from "../../network/ServerRouter";
 import FormError from "../../components/general/FormError";
 import CreateUserForm from "./components/CreateUserForm";
 import CreateUserHeader from "./components/CreateUserHeader";
-import { createUserEndpoint } from "../../network/routes/usersRoutes";
+import { createUserEndpoint } from "../../network/routes/userRoutes";
 import createUserValidateForm from "./helpers/createUserValidateForm";
 import createUserItemInitialState from "./helpers/createUserItemInitialState";
 
