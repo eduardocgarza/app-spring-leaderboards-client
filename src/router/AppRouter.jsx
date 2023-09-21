@@ -18,7 +18,6 @@ export default function AppRouter() {
           <Route path="users/new" element={<CreateUserItemPage />} />
           <Route path="users/:username/edit" element={<EditUserItemPage />} />
           <Route path="users/:username" element={<UserItemPage />} />
-
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>

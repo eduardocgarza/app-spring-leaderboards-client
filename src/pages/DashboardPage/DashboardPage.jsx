@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import useAppContext from "../../state/AppContext";
 import DashboardHeader from "./components/DashboardHeader";
 import DashboardLeaderboards from "./components/DashboardLeaderboards";
+import sortUsers from "./helpers/sortUsers";
+import formatUserObjects from "./helpers/formatUserObject";
+import searchFilterUsers from "./helpers/searchFilterUsers";
 
 export default function DashboardPage() {
   /**
@@ -22,50 +25,19 @@ export default function DashboardPage() {
   });
 
   useEffect(() => {
-    const formattedUsers = userObjects.map((user) => {
-      return {
-        userID: user.userID,
-        username: user.username,
-        firstName: user.firstName,
-        points: user.points,
-      };
-    });
-
-    if (sortMode.type === "name") {
-      formattedUsers.sort((a, b) => {
-        if (sortMode.direction === "asc") {
-          return a.firstName.localeCompare(b.firstName);
-        } else {
-          return b.firstName.localeCompare(a.firstName);
-        }
-      });
-    } else if (sortMode.type === "points") {
-      formattedUsers.sort((a, b) => {
-        if (sortMode.direction === "asc") {
-          return a.points - b.points;
-        } else {
-          return b.points - a.points;
-        }
-      });
-    }
-
+    const formattedUsers = formatUserObjects(userObjects);
+    sortUsers(sortMode, formattedUsers); // Sorts in-place
     setFormattedUsers(formattedUsers);
     setDisplayedUsers(formattedUsers);
   }, [sortMode, userObjects]);
 
   useEffect(() => {
-    const filteredUsers = formattedUsers.filter((user) => {
-      const searchKeywords = search.toLowerCase().split(" ");
-      return searchKeywords.every((keyword) =>
-        user.firstName.toLowerCase().includes(keyword)
-      );
-    });
+    const filteredUsers = searchFilterUsers(search, formattedUsers);
     setDisplayedUsers(filteredUsers);
   }, [search, formattedUsers]);
 
   function handleSearch(e) {
-    const value = e.target.value;
-    setSearch(value);
+    setSearch(e.target.value);
   }
 
   return (

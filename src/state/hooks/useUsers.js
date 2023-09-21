@@ -24,7 +24,6 @@ export default function useUsers() {
     try {
       const response = await publicRouter.get(getAllUsersEndpoint);
       const users = response.data;
-      console.log("Users: ", users);
       setUserObjects(users);
     } catch (error) {
       Logger.error(error);
